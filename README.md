@@ -1,39 +1,94 @@
-# Attention + Transformer + BERT + T5 + BART + GPT — AG News
+# Bidirectional Sequence Modeling on IMDb
 
-NLP benchmark project using a Hugging Face dataset.
+GitHub-ready NLP project using Hugging Face's `stanfordnlp/imdb` dataset.
 
 ## Models
-- BiLSTM + Additive Attention
-- Custom Transformer Encoder
-- BERT
-- T5 (text-to-text classification)
-- BART
-- GPT-2 (GPT family)
+- Bidirectional LSTM (BiLSTM)
+- Bidirectional GRU (BiGRU)
+
+## Evaluation
+- Accuracy
+- Precision
+- Recall
+- F1-score
+- Classification report
+- Confusion matrix
+- ROC curve
+- AUC
+- Training/validation curves
+- Model comparison
 
 ## Dataset
-AG News: 4-class news topic classification:
-World, Sports, Business, Sci/Tech.
 
-The standard Hugging Face AG News dataset has 120,000 training and 7,600 test examples. See the dataset card and Hugging Face documentation before redistribution or commercial use.
+The project loads:
 
-## Quick start
+```python
+from datasets import load_dataset
+dataset = load_dataset("stanfordnlp/imdb")
+```
+
+IMDb contains 25,000 labeled training reviews and 25,000 labeled test reviews, plus an unlabeled split. Labels are `0 = negative` and `1 = positive`.
+
+## Run
 
 ```bash
 pip install -r requirements.txt
-jupyter notebook notebook/Attention_Transformer_BERT_T5_BART_GPT_AGNews.ipynb
+jupyter notebook notebook/Bidirectional_IMDb_Sequence_Modeling.ipynb
 ```
 
-For Kaggle/Colab, run the installation cell first and enable GPU.
+## Architecture
 
-## Resource note
-Running every pretrained model together is computationally expensive. The notebook defaults to a reduced subset. Increase `TRAIN_SAMPLES`, `TEST_SAMPLES`, `EPOCHS`, and model max length when GPU memory/time permits.
+```text
+Raw Text
+   ↓
+TextVectorization
+   ↓
+Embedding
+   ↓
+Bidirectional LSTM / GRU
+   ↓
+Dropout
+   ↓
+Dense
+   ↓
+Sigmoid
+   ↓
+Sentiment
+```
 
+## Why Bidirectional?
 
-## Hugging Face
-https://huggingface.co/datasets/ag_news
+A normal recurrent model processes text in one direction. A bidirectional model processes the sequence from both directions and combines the representations. This can provide useful contextual information for text classification.
 
-## Citation
-Zhang, Xiang, Junbo Zhao, and Yann LeCun. "Character-level Convolutional Networks for Text Classification." NeurIPS 2015.
+## Project structure
 
-## License note
-Check the current AG News dataset card and the original corpus terms before redistributing the dataset or using it commercially.
+```text
+bidirectional-imdb-sequence-model/
+├── notebook/
+│   └── Bidirectional_IMDb_Sequence_Modeling.ipynb
+├── models/
+├── src/
+├── README.md
+├── requirements.txt
+├── .gitignore
+└── LICENSE
+```
+
+## GitHub
+
+```bash
+git init
+git add .
+git commit -m "Add Bidirectional IMDb sequence modeling"
+git branch -M main
+git remote add origin https://github.com/YOUR_USERNAME/bidirectional-imdb-sequence-model.git
+git push -u origin main
+```
+
+Large `.keras` files should generally be stored with Git LFS, GitHub Releases, or the Hugging Face Model Hub rather than ordinary Git history.
+
+## Dataset citation
+
+Maas, A. L., Daly, R. E., Pham, P. T., Huang, D., Ng, A. Y., & Potts, C. (2011). Learning Word Vectors for Sentiment Analysis. ACL-HLT 2011.
+
+Dataset: `stanfordnlp/imdb` on Hugging Face. Check its dataset card for the current license/usage terms.
