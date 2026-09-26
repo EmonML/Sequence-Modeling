@@ -861,19 +861,6 @@ AI Enthusiast
 
 ---
 
-# 📄 License
-
-This project can be distributed under the MIT License.
-
-See:
-
-```text
-LICENSE
-```
-
-for details.
-
----
 
 # ⭐ Acknowledgement
 
