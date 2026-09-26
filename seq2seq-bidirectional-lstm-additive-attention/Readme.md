@@ -857,7 +857,7 @@ Model Visualization
 
 **Md Emon Islam**
 
-Deep Learning | Machine Learning | NLP | Computer Vision | Generative AI
+AI Enthusiast
 
 ---
 
